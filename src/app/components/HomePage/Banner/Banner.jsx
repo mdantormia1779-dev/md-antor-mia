@@ -15,13 +15,13 @@ import { motion } from "framer-motion";
 
 const Banner = () => {
   return (
-    <div className="relative border-b border-white/10 overflow-hidden">
+    <div className="relative p-4 lg:p-8 overflow-hidden">
 
       {/* Background Glow */}
       <div className="absolute top-0 left-0 w-72 h-72 bg-indigo-500/20 blur-3xl rounded-full"></div>
       <div className="absolute bottom-0 right-0 w-72 h-72 bg-cyan-500/20 blur-3xl rounded-full"></div>
 
-      <div className="py-20 container mx-auto px-4 relative z-10">
+      <div className="py-20 container border-b border-white/10 pb-20 mx-auto px-4 relative z-10">
 
         <div className="grid md:grid-cols-2 gap-12 items-center">
 

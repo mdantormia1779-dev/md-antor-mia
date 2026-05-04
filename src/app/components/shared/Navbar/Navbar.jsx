@@ -19,7 +19,7 @@ const Navbar = () => {
     </>;
 
     return (
-        <div className='bg-[#020617]/80 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50'>
+        <div className='bg-[#020617]/80 p-4 lg:p-8 backdrop-blur-lg border-b border-white/10 sticky top-0 z-50'>
 
             <div className="navbar container mx-auto text-white">
 

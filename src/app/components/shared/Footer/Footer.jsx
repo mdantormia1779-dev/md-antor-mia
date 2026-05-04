@@ -4,9 +4,9 @@ import { FaGithub, FaLinkedin, FaFacebook, FaEnvelope } from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-950 text-white mt-16 border-t border-gray-800">
+    <footer className="text-white mt-16">
 
-      <div className="container mx-auto py-10 px-4">
+      <div className="container mx-auto py-10 px-4 p-4 md:p-8 lg:p-8">
 
         {/* Top Section */}
         <div className="grid md:grid-cols-3 gap-10">

@@ -31,11 +31,11 @@ const AboutPage = () => {
   ];
 
   return (
-    <section className="relative text-white py-20 overflow-hidden">
+    <section className="relative text-white p-4 md:p-8 lg:p-8 py-20 overflow-hidden">
       {/* Background Glow Effect */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full from-indigo-900/20 via-transparent to-transparent -z-10" />
 
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto">
         {/* TITLE SECTION */}
         <div className="text-center mb-16">
           <h2 className="text-sm uppercase tracking-widest text-indigo-400 font-semibold mb-2">Introduction</h2>

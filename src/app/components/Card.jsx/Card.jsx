@@ -8,7 +8,7 @@ const Card = ({ projectData = [], limit }) => {
   const data = limit ? projectData.slice(0, limit) : projectData;
 
   return (
-    <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-8">
+    <div className="container md:p-6 lg:p-0 mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 
       {data.map((project) => (
         <div
