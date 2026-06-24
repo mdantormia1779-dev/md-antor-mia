@@ -1,28 +1,50 @@
+"use client";
+
 import React from "react";
 import { FaPhoneAlt, FaUser } from "react-icons/fa";
 import { FaLocationDot } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
+import { motion } from "framer-motion";
 
 const About = () => {
+  // Animation settings
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1, 
+      transition: { staggerChildren: 0.2 } 
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+  };
+
   return (
     <section className="p-4 md:p-8 lg:p-8 text-white py-12 md:py-20 px-4">
-      <div className="container mx-auto border-b border-white/10 pb-20">
-
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+        className="container mx-auto border-b border-white/10 pb-20"
+      >
         {/* Title Section */}
-        <div className="flex items-center justify-center md:justify-start gap-3 mb-12">
+        <motion.div variants={itemVariants} className="flex items-center justify-center md:justify-start gap-3 mb-12">
           <div className="p-3 bg-blue-500/10 rounded-lg">
             <FaUser className="text-2xl md:text-3xl text-blue-400" />
           </div>
           <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">
             About <span className="text-blue-500">Me</span>
           </h1>
-        </div>
+        </motion.div>
 
         {/* Main Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
 
           {/* Left Side - Text Content */}
-          <div className="lg:col-span-7 space-y-6 text-center md:text-left">
+          <motion.div variants={itemVariants} className="lg:col-span-7 space-y-6 text-center md:text-left">
             <h2 className="text-2xl md:text-3xl font-semibold text-gray-100">
               Frontend Developer & Digital Architect
             </h2>
@@ -43,60 +65,34 @@ const About = () => {
                 My goal is to become a skilled Full Stack Developer and create impactful digital experiences that solve real-world problems.
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Side - Info Card */}
-          <div className="lg:col-span-5 w-full max-w-lg mx-auto">
+          <motion.div variants={itemVariants} className="lg:col-span-5 w-full max-w-lg mx-auto">
             <div className="bg-gray-900/40 backdrop-blur-sm border border-gray-800 rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden group">
-              {/* Card Decorative Glow */}
               <div className="absolute -top-10 -right-10 w-32 h-32 bg-blue-600/10 blur-[50px] rounded-full group-hover:bg-blue-600/20 transition-all duration-500"></div>
 
               <div className="space-y-6 relative z-10">
-                {/* Name */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-3 border-b border-gray-800/50">
-                  <div className="flex items-center gap-3 text-blue-400">
-                    <FaUser size={18} />
-                    <span className="text-gray-400 font-medium">Name</span>
+                {[
+                  { icon: FaUser, label: "Name", value: "Md Antor Mia" },
+                  { icon: MdEmail, label: "Email", value: "mdantormia1779@gmail.com" },
+                  { icon: FaPhoneAlt, label: "Phone", value: "01318964063" },
+                  { icon: FaLocationDot, label: "Location", value: "Gaibandha, Bangladesh" }
+                ].map((info, idx) => (
+                  <div key={idx} className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-3 border-b border-gray-800/50 last:border-0">
+                    <div className="flex items-center gap-3 text-blue-400">
+                      <info.icon size={18} />
+                      <span className="text-gray-400 font-medium">{info.label}</span>
+                    </div>
+                    <span className="text-white font-semibold md:text-lg wrap-break-words">{info.value}</span>
                   </div>
-                  <span className="text-white font-semibold md:text-lg">Md Antor Mia</span>
-                </div>
-
-                {/* Email */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-3 border-b border-gray-800/50">
-                  <div className="flex items-center gap-3 text-blue-400">
-                    <MdEmail size={18} />
-                    <span className="text-gray-400 font-medium">Email</span>
-                  </div>
-                  <span className="text-white font-semibold break-all text-sm md:text-base">
-                    mdantormia1779@gmail.com
-                  </span>
-                </div>
-
-                {/* Phone */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-3 border-b border-gray-800/50">
-                  <div className="flex items-center gap-3 text-blue-400">
-                    <FaPhoneAlt size={18} />
-                    <span className="text-gray-400 font-medium">Phone</span>
-                  </div>
-                  <span className="text-white font-semibold md:text-lg">01318964063</span>
-                </div>
-
-                {/* Location */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 py-3">
-                  <div className="flex items-center gap-3 text-blue-400">
-                    <FaLocationDot size={18} />
-                    <span className="text-gray-400 font-medium">Location</span>
-                  </div>
-                  <span className="text-white font-semibold md:text-lg tracking-tight">
-                    Gaibandha, Bangladesh
-                  </span>
-                </div>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -1,115 +1,86 @@
+"use client";
+
 import React from "react";
 import Link from "next/link";
 import { FaGithub, FaLinkedin, FaFacebook, FaEnvelope } from "react-icons/fa";
+import { motion } from "framer-motion"; // এনিমেশনের জন্য
 
 const Footer = () => {
   return (
-    <footer className="text-white mt-16">
-
-      <div className="container mx-auto py-10 px-4 p-4 md:p-8 lg:p-8">
-
+    <footer className="text-white border-t border-gray-800 bg-gray-950/50">
+      <div className="container mx-auto py-16 px-6 lg:px-8">
+        
         {/* Top Section */}
-        <div className="grid md:grid-cols-3 gap-10">
+        <div className="grid md:grid-cols-3 gap-12 lg:gap-20">
 
-          {/* About */}
-          <div>
-            <h2 className="text-xl font-bold text-blue-400 mb-3">
+          {/* About Section */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold bg-clip-text text-transparent bg-linear-to-r from-blue-400 to-cyan-400">
               Md Antor Mia
             </h2>
-            <p className="text-gray-400 leading-relaxed">
-              A passionate Frontend Developer focused on building modern,
-              responsive and user-friendly web applications.
+            <p className="text-gray-400 leading-relaxed text-sm">
+              A passionate Frontend Developer focused on building modern, responsive, 
+              and user-friendly web applications that bring ideas to life.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h2 className="text-lg font-semibold mb-3 text-blue-400">
+            <h2 className="text-lg font-semibold mb-6 text-white border-l-4 border-blue-500 pl-3">
               Quick Links
             </h2>
-
-            <ul className="space-y-2 text-gray-400">
-
-              <li>
-                <Link href="/" className="hover:text-blue-400">
-                  Home
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/about" className="hover:text-blue-400">
-                  About
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/project" className="hover:text-blue-400">
-                  Projects
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/contact" className="hover:text-blue-400">
-                  Contact
-                </Link>
-              </li>
-
+            <ul className="space-y-3 text-gray-400">
+              {['Home', 'About', 'Project', 'Contact'].map((item) => (
+                <li key={item}>
+                  <Link href={item === 'Home' ? '/' : `/${item.toLowerCase()}`} className="hover:text-blue-400 hover:translate-x-2 transition-all block">
+                    {item}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact */}
+          {/* Contact Section */}
           <div>
-            <h2 className="text-lg font-semibold mb-3 text-blue-400">
-              Contact
+            <h2 className="text-lg font-semibold mb-6 text-white border-l-4 border-blue-500 pl-3">
+              Get In Touch
             </h2>
-
-            <a
-              href="mailto:mdantormia1779@gmail.com"
-              className="text-gray-400 flex items-center gap-2 hover:text-blue-400"
-            >
-              <FaEnvelope /> mdantormia1779@gmail.com
+            <a href="mailto:mdantormia1779@gmail.com" className="text-gray-400 flex items-center gap-3 hover:text-blue-400 transition mb-6">
+              <div className="p-2 bg-gray-900 rounded-lg"><FaEnvelope /></div>
+              mdantormia1779@gmail.com
             </a>
 
             {/* Social Icons */}
-            <div className="flex gap-4 mt-4 text-xl">
-
-              <a
-                href="https://github.com/mdantormia1779-dev"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-400 transition"
-              >
-                <FaGithub />
-              </a>
-
-              <a
-                href="https://www.linkedin.com/in/md-antor-mia-antor/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-400 transition"
-              >
-                <FaLinkedin />
-              </a>
-
-              <a
-                href="https://www.facebook.com/md.antormia.1779"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-blue-400 transition"
-              >
-                <FaFacebook />
-              </a>
-
+            <div className="flex gap-4 text-xl">
+              {[
+                { icon: FaGithub, link: "https://github.com/mdantormia1779-dev" },
+                { icon: FaLinkedin, link: "https://www.linkedin.com/in/md-antor-mia-antor/" },
+                { icon: FaFacebook, link: "https://www.facebook.com/md.antormia.1779" }
+              ].map((social, i) => (
+                <motion.a 
+                  key={i} 
+                  whileHover={{ y: -5, color: "#60a5fa" }}
+                  href={social.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="p-3 bg-gray-900 rounded-full hover:bg-gray-800 transition"
+                >
+                  <social.icon />
+                </motion.a>
+              ))}
             </div>
           </div>
-
         </div>
 
-        {/* Bottom */}
-        <div className="text-center text-gray-500 mt-10 border-t border-gray-800 pt-6">
-          © {new Date().getFullYear()} All Rights Reserved | Built with ❤️ by Antor
-        </div>
-
+        {/* Bottom Section */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          className="text-center text-gray-600 mt-16 border-t border-gray-900 pt-8 text-sm"
+        >
+          <p>© {new Date().getFullYear()} Md Antor Mia. All Rights Reserved.</p>
+          <p className="mt-2 text-xs opacity-70">Built with React, Next.js & Tailwind CSS</p>
+        </motion.div>
       </div>
     </footer>
   );
