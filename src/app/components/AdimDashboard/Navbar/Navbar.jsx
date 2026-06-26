@@ -3,11 +3,23 @@
 import { useSession, signOut } from "@/lib/auth-client";
 import { Bell } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const { data: session, isPending } = useSession();
 
   const user = session?.user;
+  const router = useRouter();
+  const handleSignOut = async () => {
+    await signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/login"); // লগআউটের পর লগইন পেজে পাঠান
+          router.refresh(); // ক্লায়েন্ট রাউটার রিফ্রেশ করুন
+        },
+      },
+    });
+  };
 
   if (isPending) {
     return (
@@ -51,7 +63,7 @@ const Navbar = () => {
 
         {/* Logout */}
         <button
-          onClick={() => signOut()}
+          onClick={handleSignOut}
           className="bg-linear-to-r from-red-500 to-pink-500 text-white px-4 py-2 rounded-lg text-sm font-medium hover:opacity-90 transition"
         >
           Logout
