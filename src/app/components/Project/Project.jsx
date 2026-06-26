@@ -10,27 +10,40 @@ const Project = () => {
   const [projectData, setProjectData] = useState([]);
 
   useEffect(() => {
-    fetch("/data.json")
-      .then((res) => res.json())
-      .then((data) => setProjectData(data));
-  }, []);
+    const fetchProjects = async () => {
+      try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/projects`);
+        const result = await response.json();
+        
+        // আপনার API রেসপন্স অনুযায়ী ডাটা সেট করা হচ্ছে
+        if (result.success) {
+          setProjectData(result.data);
+        } else {
+          setProjectData(Array.isArray(result) ? result : []);
+        }
+      } catch (error) {
+        console.error("Error fetching projects:", error);
+      }
+    };
 
-  // Animation variants
+    fetchProjects();
+  }, []); // [] দেয়া আছে যেন কম্পোনেন্ট মাউন্ট হওয়ার সময় একবারই কল হয়
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
       opacity: 1, 
-      transition: { staggerChildren: 0.3 } 
+      transition: { staggerChildren: 0.2 } 
     }
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
   };
 
   return (
-    <section className="p-4 md:p-8 lg:p-8 text-white py-12 md:py-20 px-4">
+    <section className="text-white py-12 md:py-20 px-4">
       <motion.div 
         variants={containerVariants}
         initial="hidden"
@@ -40,7 +53,6 @@ const Project = () => {
       >
         {/* Header Section */}
         <div className="flex flex-col sm:flex-row justify-between items-center gap-6 mb-12">
-          
           <motion.div variants={itemVariants} className="flex items-center gap-4 group">
             <div className="p-3 bg-blue-500/10 rounded-xl group-hover:bg-blue-500/20 transition-colors">
               <FaFolderOpen className="text-2xl md:text-3xl text-blue-400" />
@@ -63,6 +75,7 @@ const Project = () => {
 
         {/* Project Cards Grid */}
         <motion.div variants={itemVariants} className="w-full">
+          {/* এখানে যদি ডাটা না আসে তাহলে লোডিং স্টেট বা খালি অবস্থার হ্যান্ডলিং যোগ করতে পারেন */}
           <Card projectData={projectData} limit={3} />
         </motion.div>
 
